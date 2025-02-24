@@ -5,10 +5,24 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+#    active: native
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: "file:../configfiles"
+#        native:
+#          search-locations: "file:../configfiles"
 #          search-locations: "classpath:/config"
+        git:
+          uri: https://github.com/ErosKollerDev/springboot-configserver-only-confiig-files.git
+          default-level: main
+          timeout: 10
+          clone-on-start: true
+          force-pull: true
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+encrypt:
+  key: ${ENCRYPT_KEY}
