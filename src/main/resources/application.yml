@@ -1,28 +1,43 @@
-server:
-  port: 8071
-
 spring:
   application:
     name: "configserver"
   profiles:
-#    active: native
+    #    active: native
     active: git
   cloud:
     config:
       server:
-#        native:
-#          search-locations: "file:../configfiles"
-#          search-locations: "classpath:/config"
+        #        native:
+        #          search-locations: "file:../configfiles"
+        #          search-locations: "classpath:/config"
         git:
           uri: https://github.com/ErosKollerDev/springboot-configserver-only-confiig-files.git
           default-level: main
           timeout: 10
           clone-on-start: true
           force-pull: true
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
 encrypt:
   key: ${ENCRYPT_KEY}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+server:
+  port: 8071
